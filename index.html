@@ -5,55 +5,68 @@
     <title>Jogo Peladan de Tarot</title>
     <style>
         .carta {
-            border: 1px solid black;
-            padding: 10px;
-            margin: 10px;
+            width: 150px;
+            height: 250px;
+            border: 2px solid black;
+            margin: 35px;
+            position: absolute;
         }
+
+        /* Define as posições iniciais das cartas */
+        #carta1 { top: 50px; left: 50px; }
+        #carta2 { top: 50px; left: 220px; }
+        #carta3 { top: 50px; left: 390px; }
+        #carta4 { top: 50px; left: 560px; }
+        #carta5 { top: 50px; left: 730px; }
     </style>
 </head>
 <body>
+    
     <button id="embaralhar">Embaralhar Cartas</button>
-    <div id="carta"></div>
+    <h2>Peladan</h2>
+    <div id="cartas">
+        <img id="carta1" class="carta" src="" alt="Arcano 1">
+        <img id="carta2" class="carta" src="" alt="Arcano 2">
+        <img id="carta3" class="carta" src="" alt="Arcano 3">
+        <img id="carta4" class="carta" src="" alt="Arcano 4">
+        <img id="carta5" class="carta" src="" alt="Arcano 5">
+    </div>
 
     <script>
-        const cartasTarot = [
-            { nome: "O Louco", descricao: "Descrição do Louco" },
-            { nome: "O Mago", descricao: "Descrição do Mago" },
-            { nome: "A Sacerdotisa", descricao: "Descrição da Sacerdotisa" },
-            { nome: "A Imperatriz", descricao: "Descrição da Imperatriz" },
-            { nome: "O Imperador", descricao: "Descrição do Imperador" },
-            { nome: "O Hierofante", descricao: "Descrição do Hierofante" },
-            { nome: "Os Enamorados", descricao: "Descrição dos Enamorados" },
-            { nome: "A Carruagem", descricao: "Descrição da Carruagem" },
-            { nome: "A Justiça", descricao: "Descrição da Justiça" },
-            { nome: "O Eremita", descricao: "Descrição do Eremita" },
-            { nome: "A Roda da Fortuna", descricao: "Descrição da Roda da Fortuna" },
-            { nome: "A Força", descricao: "Descrição da Força" },
-            { nome: "O Enforcado", descricao: "Descrição do Enforcado" },
-            { nome: "A Morte", descricao: "Descrição da Morte" },
-            { nome: "A Temperança", descricao: "Descrição da Temperança" },
-            { nome: "O Diabo", descricao: "Descrição do Diabo" },
-            { nome: "A Torre", descricao: "Descrição da Torre" },
-            { nome: "A Estrela", descricao: "Descrição da Estrela" },
-            { nome: "A Lua", descricao: "Descrição da Lua" },
-            { nome: "O Sol", descricao: "Descrição do Sol" },
-            { nome: "O Julgamento", descricao: "Descrição do Julgamento" },
-            { nome: "O Mundo", descricao: "Descrição do Mundo" },
-            // Adicione todas as cartas restantes
-            // ...
+        const arcanosMaiores = [
+            { id: 0, nome: "O Louco", descricao: "Espontaneidade, liberdade, aventura, mudança." },
+            { id: 1, nome: "O Mago", descricao: "Habilidade, vontade, poder, criatividade." },
+            { id: 2, nome: "A Sacerdotisa", descricao: "Intuição, mistério, introspecção, mistério." },
+            { id: 3, nome: "A Imperatriz", descricao: "Fertilidade, abundância, nutrição, amor." },
+            { id: 4, nome: "O Imperador", descricao: "Autoridade, estabilidade, poder, liderança." },
+            { id: 5, nome: "O Hierofante", descricao: "Tradição, religião, orientação, sabedoria." },
+            { id: 6, nome: "Os Enamorados", descricao: "Amor, escolha, relacionamentos, dualidade." },
+            { id: 7, nome: "A Carruagem", descricao: "Direção, controle, vitória, ambição." },
+            { id: 8, nome: "A Justiça", descricao: "Equilíbrio, justiça, lei, ordem." },
+            { id: 9, nome: "O Eremita", descricao: "Solidão, introspecção, orientação, reflexão." },
+            { id: 10, nome: "A Roda da Fortuna", descricao: "Sorte, destino, mudança, ciclos." },
+            { id: 11, nome: "A Força", descricao: "Coragem, paixão, autocontrole, força interior." },
+            { id: 12, nome: "O Enforcado", descricao: "Sacrifício, rendição, iluminação, perspectiva." },
+            { id: 13, nome: "A Morte", descricao: "Transformação, renovação, fim de um ciclo." },
+            { id: 14, nome: "A Temperança", descricao: "Equilíbrio, harmonia, moderação, cura." },
+            { id: 15, nome: "O Diabo", descricao: "Desejo, tentação, apego, negatividade." },
+            { id: 16, nome: "A Torre", descricao: "Mudança súbita, destruição, libertação." },
+            { id: 17, nome: "A Estrela", descricao: "Esperança, inspiração, intuição, iluminação." },
+            { id: 18, nome: "A Lua", descricao: "Ilusão, confusão, intuição, instintos." },
+            { id: 19, nome: "O Sol", descricao: "Alegria, sucesso, vitalidade, claridade." },
+            { id: 20, nome: "O Julgamento", descricao: "Renovação, avaliação, despertar espiritual." },
+            { id: 21, nome: "O Mundo", descricao: "Realização, conclusão, recompensa, sucesso." }
         ];
 
-        let cartasDisponiveis = [...cartasTarot];
-
-        // Função para criar um jogo Peladan com 5 cartas
         function criarJogoPeladan() {
             const jogoPeladan = [];
 
+            const cartasDisponiveis = [...arcanosMaiores];
+
             for (let i = 0; i < 5; i++) {
                 if (cartasDisponiveis.length === 0) {
-                    cartasDisponiveis = [...cartasTarot];
+                    break;
                 }
-                // Escolha uma carta aleatória do baralho disponível
                 const index = Math.floor(Math.random() * cartasDisponiveis.length);
                 const carta = cartasDisponiveis.splice(index, 1)[0];
                 jogoPeladan.push(carta);
@@ -62,25 +75,15 @@
             return jogoPeladan;
         }
 
-        // Função para exibir um jogo Peladan
         function exibirJogoPeladan(jogo) {
-            const cartaDiv = document.getElementById("carta");
-            cartaDiv.innerHTML = '';
-
-            for (const carta of jogo) {
-                const divCarta = document.createElement("div");
-                divCarta.classList.add("carta");
-                divCarta.innerHTML = `
-                    <h3>${carta.nome}</h3>
-                    <p>${carta.descricao}</p>
-                `;
-                cartaDiv.appendChild(divCarta);
+            for (let i = 0; i < 5; i++) {
+                const imgElement = document.getElementById(`carta${i + 1}`);
+                imgElement.src = `img/arcano${jogo[i].id}.jpg`;
+                imgElement.alt = jogo[i].nome;
             }
         }
 
-        // Manipule o clique do botão "Embaralhar Cartas"
         document.getElementById("embaralhar").addEventListener("click", function () {
-            // Crie um novo jogo Peladan
             const jogoPeladan = criarJogoPeladan();
             exibirJogoPeladan(jogoPeladan);
         });
