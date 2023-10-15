@@ -1,0 +1,2 @@
+# waitepathweb
+waitepath tarot
