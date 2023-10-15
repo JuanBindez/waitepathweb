@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo Peladan de Tarot</title>
+    <style>
+        .carta {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="embaralhar">Embaralhar Cartas</button>
+    <div id="carta"></div>
+
+    <script>
+        const cartasTarot = [
+            { nome: "O Louco", descricao: "Descrição do Louco" },
+            { nome: "O Mago", descricao: "Descrição do Mago" },
+            { nome: "A Sacerdotisa", descricao: "Descrição da Sacerdotisa" },
+            { nome: "A Imperatriz", descricao: "Descrição da Imperatriz" },
+            { nome: "O Imperador", descricao: "Descrição do Imperador" },
+            { nome: "O Hierofante", descricao: "Descrição do Hierofante" },
+            { nome: "Os Enamorados", descricao: "Descrição dos Enamorados" },
+            { nome: "A Carruagem", descricao: "Descrição da Carruagem" },
+            { nome: "A Justiça", descricao: "Descrição da Justiça" },
+            { nome: "O Eremita", descricao: "Descrição do Eremita" },
+            { nome: "A Roda da Fortuna", descricao: "Descrição da Roda da Fortuna" },
+            { nome: "A Força", descricao: "Descrição da Força" },
+            { nome: "O Enforcado", descricao: "Descrição do Enforcado" },
+            { nome: "A Morte", descricao: "Descrição da Morte" },
+            { nome: "A Temperança", descricao: "Descrição da Temperança" },
+            { nome: "O Diabo", descricao: "Descrição do Diabo" },
+            { nome: "A Torre", descricao: "Descrição da Torre" },
+            { nome: "A Estrela", descricao: "Descrição da Estrela" },
+            { nome: "A Lua", descricao: "Descrição da Lua" },
+            { nome: "O Sol", descricao: "Descrição do Sol" },
+            { nome: "O Julgamento", descricao: "Descrição do Julgamento" },
+            { nome: "O Mundo", descricao: "Descrição do Mundo" },
+            // Adicione todas as cartas restantes
+            // ...
+        ];
+
+        let cartasDisponiveis = [...cartasTarot];
+
+        // Função para criar um jogo Peladan com 5 cartas
+        function criarJogoPeladan() {
+            const jogoPeladan = [];
+
+            for (let i = 0; i < 5; i++) {
+                if (cartasDisponiveis.length === 0) {
+                    cartasDisponiveis = [...cartasTarot];
+                }
+                // Escolha uma carta aleatória do baralho disponível
+                const index = Math.floor(Math.random() * cartasDisponiveis.length);
+                const carta = cartasDisponiveis.splice(index, 1)[0];
+                jogoPeladan.push(carta);
+            }
+
+            return jogoPeladan;
+        }
+
+        // Função para exibir um jogo Peladan
+        function exibirJogoPeladan(jogo) {
+            const cartaDiv = document.getElementById("carta");
+            cartaDiv.innerHTML = '';
+
+            for (const carta of jogo) {
+                const divCarta = document.createElement("div");
+                divCarta.classList.add("carta");
+                divCarta.innerHTML = `
+                    <h3>${carta.nome}</h3>
+                    <p>${carta.descricao}</p>
+                `;
+                cartaDiv.appendChild(divCarta);
+            }
+        }
+
+        // Manipule o clique do botão "Embaralhar Cartas"
+        document.getElementById("embaralhar").addEventListener("click", function () {
+            // Crie um novo jogo Peladan
+            const jogoPeladan = criarJogoPeladan();
+            exibirJogoPeladan(jogoPeladan);
+        });
+    </script>
+</body>
+</html>
