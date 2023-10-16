@@ -2,36 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Waitepathweb</title>
+    <title>Jogo Peladan de Tarot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
         .carta {
-            width: 150px;
-            height: 250px;
+            width: 16%; /* Ajusta a largura da carta em relação à largura da tela */
+            height: 50%; /* Ajusta a altura da carta em relação à altura da tela */
             border: 2px solid black;
-            margin: 85px;
+            margin: 10px;
             position: absolute;
         }
 
         .container {
             text-align: center;
+            position: relative;
         }
 
-        /* Define as posições iniciais das cartas */
-        #carta1 { top: 350px; left: 0px; }
-        #carta2 { top: 350px; left: 420px; }
-        #carta3 { top: 50px; left: 210px; }
-        #carta4 { top: 650px; left: 210px; }
-        #carta5 { top: 350px; left: 210px; }
+        #carta1 { top: 80%; left: 20%; } /* Ajusta as coordenadas da carta 1 em relação à tela */
+        #carta2 { top: 80%; left: 60%; } /* Ajusta as coordenadas da carta 2 em relação à tela */
+        #carta3 { top: 15%; left: 40%; } /* Ajusta as coordenadas da carta 3 em relação à tela */
+        #carta4 { top: 140%; left: 40%; } /* Ajusta as coordenadas da carta 4 em relação à tela */
+        #carta5 { top: 80%; left: 40%; }
+
+
     </style>
 </head>
 <body>
-    <div class="container mt-6">
-        <h2 class="mb-3">Jogo Peladan Tarot Waite</h2>
+    <div class="container-fluid mt-8">
         <div id="cartas" class="d-flex justify-content-center">
+            <h2 class="mb-3">Jogo Peladan de Tarot</h2>
             <img id="carta1" class="carta" src="" alt="Arcano 1">
             <img id="carta2" class="carta" src="" alt="Arcano 2">
             <img id="carta3" class="carta" src="" alt="Arcano 3">
