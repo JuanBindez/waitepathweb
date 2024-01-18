@@ -1,47 +1,41 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Jogo Peladan de Tarot</title>
+    <title>Waite Path</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
         .carta {
-            width: 26%; /* Ajusta a largura da carta em relação à largura da tela */
-            height: 45%; /* Ajusta a altura da carta em relação à altura da tela */
+            width: 100%;
+            max-width: 300px; /* Defina a largura máxima para evitar que a carta fique muito grande */
+            height: auto;
             border: 2px solid black;
             margin: 10px;
-            position: absolute;
+            cursor: pointer;
+            display: none;
         }
 
         .container {
             text-align: center;
             position: relative;
         }
-
-        #carta1 { top: 65%; left: 0%; } /* Ajusta as coordenadas da carta 1 em relação à tela */
-        #carta2 { top: 65%; left: 60%; } /* Ajusta as coordenadas da carta 2 em relação à tela */
-        #carta3 { top: 15%; left: 30%; } /* Ajusta as coordenadas da carta 3 em relação à tela */
-        #carta4 { top: 120%; left: 30%; } /* Ajusta as coordenadas da carta 4 em relação à tela */
-        #carta5 { top: 65%; left: 30%; }
-
-
     </style>
 </head>
 <body>
-    <div class="container-fluid mt-8">
+    <div class="container-fluid mt-4">
+        <h2 class="mb-3">Cartas Aleatórias de Tarot</h2>
         <div id="cartas" class="d-flex justify-content-center">
-            <h2 class="mb-3">Jogo Peladan de Tarot</h2>
-            <img id="carta1" class="carta" src="" alt="Arcano 1">
-            <img id="carta2" class="carta" src="" alt="Arcano 2">
-            <img id="carta3" class="carta" src="" alt="Arcano 3">
-            <img id="carta4" class="carta" src="" alt="Arcano 4">
-            <img id="carta5" class="carta" src="" alt="Arcano 5">
+            
+            <img id="carta" class="carta img-fluid" src="" alt="Carta de Tarot" onclick="exibirSignificado()">
         </div>
-        <div class="d-flex justify-content-center">
-            <button id="embaralhar" class="btn btn-primary">Jogar Cartas</button>
+        <div class="d-flex justify-content-center mt-3">
+            <button id="embaralhar" class="btn btn-primary">Jogar Carta</button>
         </div>
     </div>
 
@@ -71,35 +65,23 @@
             { id: 21, nome: "O Mundo", descricao: "Realização, conclusão, recompensa, sucesso." }
         ];
 
-        function criarJogoPeladan() {
-            const jogoPeladan = [];
-
-            const cartasDisponiveis = [...arcanosMaiores];
-
-            for (let i = 0; i < 5; i++) {
-                if (cartasDisponiveis.length === 0) {
-                    break;
-                }
-                const index = Math.floor(Math.random() * cartasDisponiveis.length);
-                const carta = cartasDisponiveis.splice(index, 1)[0];
-                jogoPeladan.push(carta);
-            }
-
-            return jogoPeladan;
+        function exibirCartaAleatoria() {
+            const cartaIndex = Math.floor(Math.random() * arcanosMaiores.length);
+            const carta = arcanosMaiores[cartaIndex];
+            const imgElement = document.getElementById("carta");
+            imgElement.src = `img/arcano${carta.id}.jpg`;
+            imgElement.alt = carta.nome;
+            imgElement.style.display = 'block';
         }
 
-        function exibirJogoPeladan(jogo) {
-            for (let i = 0; i < 5; i++) {
-                const imgElement = document.getElementById(`carta${i + 1}`);
-                imgElement.src = `img/arcano${jogo[i].id}.jpg`;
-                imgElement.alt = jogo[i].nome;
-            }
+        function exibirSignificado() {
+            alert(`Significado da carta:\n${arcanosMaiores[0].descricao}`);
         }
 
         document.getElementById("embaralhar").addEventListener("click", function () {
-            const jogoPeladan = criarJogoPeladan();
-            exibirJogoPeladan(jogoPeladan);
+            exibirCartaAleatoria();
         });
     </script>
 </body>
 </html>
+
